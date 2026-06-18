@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PostMessage Listener</title>
+</head>
+<body>
+    <h1>Listening for messages...</h1>
+    <div id="output"></div>
+
+    <script>
+        const ALLOWED_ORIGIN = 'https://f476beef-b8dd-4f58-aff4-274683ab1a8c.domoapps.dev.domo.com';
+
+        window.addEventListener('message', function(event) {
+            // Only accept messages from the trusted domain
+            if (event.origin !== ALLOWED_ORIGIN) {
+                console.warn('Ignored message from:', event.origin);
+                return;
+            }
+
+            console.log('Received:', event.data);
+            document.getElementById('output').innerHTML += '<p>' + JSON.stringify(event.data) + '</p>';
+        });
+    </script>
+</body>
+</html>
